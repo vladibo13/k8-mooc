@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: to-do-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: to-do
+  template:
+    metadata:
+      labels:
+        app: to-do
+    spec:
+      containers:
+        - name: to-do
+          image: vladibo/todo-app:0.1.0
