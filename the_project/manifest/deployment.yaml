@@ -14,4 +14,7 @@ spec:
     spec:
       containers:
         - name: to-do
-          image: vladibo/todo-app:0.1.0
+          image: vladibo/todo-app:0.1.1
+          env:
+          - name: PORT
+            value: "3001"
