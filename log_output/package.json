@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "Vladimir Bozhkov",
   "license": "ISC",
-  "description": "log output"
+  "description": "log output",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }

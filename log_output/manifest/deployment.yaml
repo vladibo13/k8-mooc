@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: vladibo/random-string-logger:1.0.0
+          image: vladibo/random-string-logger:1.0.2
