@@ -2,7 +2,6 @@ const crypto = require('crypto')
 const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
-
 const randomString = crypto.randomUUID()
 
 console.log("App started. Random string:", randomString)
