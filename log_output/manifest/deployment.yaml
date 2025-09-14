@@ -1,17 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output-dep
+  name: logger-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log-output
+      app: logger
   template:
     metadata:
       labels:
-        app: log-output
+        app: logger
     spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
       containers:
         - name: log-output
-          image: vladibo/random-string-logger:1.0.2
+          image: vladibo/random-string-logger:1.0.5
+          volumeMounts: # Mount volume
+          - name: shared-log
+            mountPath: logs
+        - name: log-reader
+          image: vladibo/log-reader:1.0.1  
+          volumeMounts: # Mount volume
+          - name: shared-log
+            mountPath: logs    
