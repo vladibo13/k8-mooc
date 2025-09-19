@@ -12,6 +12,13 @@ spec:
       labels:
         app: ping-pong
     spec:
+      volumes:
+        - name: shared-pong-log
+          persistentVolumeClaim: 
+            claimName: log-output-claim  
       containers:
         - name: ping-pong
-          image: vladibo/ping-pong:1.0.0
+          image: vladibo/ping-pong:1.0.3
+          volumeMounts: # Mount volume
+          - name: shared-pong-log
+            mountPath: /tmp/kube

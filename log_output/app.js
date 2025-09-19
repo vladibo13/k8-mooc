@@ -9,6 +9,9 @@ const randomString = crypto.randomUUID()
 
 const dir = '/logs'
 const filePath = path.join(dir, 'log.txt')
+
+const pong_dir = '/tmp/kube'
+const filePathPong = path.join(pong_dir, 'log.txt')
 doesDirExist(dir)
 
 function doesDirExist(dir) {
@@ -30,12 +33,18 @@ console.log("App started. Random string:", randomString)
 setInterval(() => {
   const timestamp = new Date().toISOString()
   console.log(`${timestamp}: ${randomString}`)
-  writeToFile(filePath, timestamp, randomString)
+  // writeToFile(filePath, timestamp, randomString)
 }, 5000);
 
-// app.get('/', (req, res) => {
-//   res.json('Log Output app running. See <a href="/status">/status</a>.')
-// })
+app.get('/log-output', (req, res) => {
+   fs.readFile(filePathPong, 'utf8', (err, data) => {
+     if (err) {
+       if (err.code === 'ENOENT') return res.status(200).send('(empty)')
+       return res.status(500).send('read error')
+     }
+     res.type('text/plain').send(new Date().toISOString() + ` ${randomString} ` + data)
+   })
+})
 
 app.get('/status', (req, res) => {
   res.json({

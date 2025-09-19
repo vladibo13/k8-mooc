@@ -7,7 +7,7 @@ RUN npm ci --omit=dev
 
 COPY app.js ./
 
-ENV PORT=3000
-EXPOSE 3000
+ENV PORT=3002
+EXPOSE 3002
 
 CMD ["npm", "start"]
