@@ -12,9 +12,13 @@ spec:
       labels:
         app: to-do
     spec:
+      volumes:
+        - name: image-volume
+          persistentVolumeClaim: 
+            claimName: log-output-claim    
       containers:
         - name: to-do
-          image: vladibo/todo-app:0.1.1
-          env:
-          - name: PORT
-            value: "3001"
+          image: vladibo/todo-app:0.1.2
+          volumeMounts: 
+          - name: image-volume
+            mountPath: /tmp/kube
