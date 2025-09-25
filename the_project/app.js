@@ -84,6 +84,25 @@ app.get("/", (_req, res) => {
         <div style="margin-top:1rem;">
           <a href="/crash">Crash container</a> (for testing PV persistence)
         </div>
+        <div>
+          <input id="todoInput" 
+              type="text" 
+              maxlength="140" 
+              placeholder="Write a todo (max 140 chars)" 
+              style="width:70%; padding:0.5rem;"/>
+          <button id="sendBtn" disabled 
+                  style="padding:0.5rem 1rem; margin-left:0.5rem;">Send</button>
+          <div style="margin-top:0.5rem; font-size:0.9rem; color:#555;">
+            <span id="charCount">0</span>/140
+          </div>
+
+          <h3 style="margin-top:1.5rem;">Existing Todos</h3>
+          <ul id="todoList">
+            <li>Buy milk</li>
+            <li>Check PV persistence</li>
+            <li>Finish Express exercise</li>
+          </ul>
+        </div>
       </body>
     </html>
   `);
