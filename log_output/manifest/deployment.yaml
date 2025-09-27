@@ -20,7 +20,7 @@ spec:
             claimName: log-output-claim
       containers:
         - name: log-output
-          image: vladibo/random-string-logger:1.0.8
+          image: vladibo/random-string-logger:1.0.10
           volumeMounts: # Mount volume
           # - name: shared-log
           #   mountPath: logs

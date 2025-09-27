@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const express = require('express')
 const fs = require('fs')
 const path = require('path')
+const axios = require('axios')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -12,6 +13,7 @@ const filePath = path.join(dir, 'log.txt')
 
 const pong_dir = '/tmp/kube'
 const filePathPong = path.join(pong_dir, 'log.txt')
+const PING_PONG_URL = 'http://ping-pong-svc:2345/pingpong'
 doesDirExist(dir)
 
 function doesDirExist(dir) {
@@ -36,14 +38,16 @@ setInterval(() => {
   // writeToFile(filePath, timestamp, randomString)
 }, 5000);
 
-app.get('/log-output', (req, res) => {
-   fs.readFile(filePathPong, 'utf8', (err, data) => {
-     if (err) {
-       if (err.code === 'ENOENT') return res.status(200).send('(empty)')
-       return res.status(500).send('read error')
-     }
-     res.type('text/plain').send(new Date().toISOString() + ` ${randomString} ` + data)
-   })
+app.get('/', async (req, res) => {
+  //  fs.readFile(filePathPong, 'utf8', (err, data) => {
+  //    if (err) {
+  //      if (err.code === 'ENOENT') return res.status(200).send('(empty)')
+  //      return res.status(500).send('read error')
+  //    }
+  //    res.type('text/plain').send(new Date().toISOString() + ` ${randomString} ` + data)
+  //  })
+  const { data } = await axios.get(PING_PONG_URL)
+  res.json(new Date().toISOString() + ` ${randomString} ` + data.counter)
 })
 
 app.get('/status', (req, res) => {

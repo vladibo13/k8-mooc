@@ -18,7 +18,7 @@ spec:
             claimName: log-output-claim  
       containers:
         - name: ping-pong
-          image: vladibo/ping-pong:1.0.3
+          image: vladibo/ping-pong:1.0.4
           volumeMounts: # Mount volume
           - name: shared-pong-log
             mountPath: /tmp/kube

@@ -22,8 +22,8 @@ function writeToFile(filePath, counter) {
 
 app.get('/pingpong', (req, res) => {
     counter++
-    writeToFile(filePath, counter)
-    res.json('pong / pongs ' + counter)
+    // writeToFile(filePath, counter)
+    res.json({counter : 'pong / pongs ' + counter})
 })
 
 app.listen(PORT, () => {
