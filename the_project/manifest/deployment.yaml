@@ -18,7 +18,7 @@ spec:
             claimName: log-output-claim    
       containers:
         - name: to-do
-          image: vladibo/todo-app:0.1.2
+          image: vladibo/todo-app:0.1.6
           volumeMounts: 
           - name: image-volume
             mountPath: /tmp/kube

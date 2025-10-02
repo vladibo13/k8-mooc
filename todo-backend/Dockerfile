@@ -6,9 +6,8 @@ COPY package.json package-lock.json* ./
 RUN npm ci --omit=dev
 
 COPY app.js ./
-COPY dist ./dist
 
-ENV PORT=3000
-EXPOSE 3000
+ENV PORT=3005
+EXPOSE 3005
 
 CMD ["npm", "start"]
