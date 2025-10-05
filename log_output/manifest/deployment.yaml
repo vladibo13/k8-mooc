@@ -14,21 +14,26 @@ spec:
         app: logger
     spec:
       volumes:
-        # - name: shared-log
-        #   emptyDir: {}
+        - name: info-volume
+          configMap:
+            name: log-output-config
+            items:
+              - key: information.txt
+                path: information.txt
         - name: shared-pong-log
           persistentVolumeClaim: 
             claimName: log-output-claim
       containers:
         - name: log-output
-          image: vladibo/random-string-logger:1.0.10
-          volumeMounts: # Mount volume
-          # - name: shared-log
-          #   mountPath: logs
-          - name: shared-pong-log
-            mountPath: /tmp/kube
-        # - name: log-reader
-        #   image: vladibo/log-reader:1.0.1  
-        #   volumeMounts: # Mount volume
-        #   - name: shared-log
-        #     mountPath: logs    
+          image: vladibo/random-string-logger:1.0.11
+          env:
+            - name: MESSAGE
+              valueFrom:
+                configMapKeyRef:
+                  name: log-output-config
+                  key: MESSAGE
+          volumeMounts: 
+            - name: info-volume
+              mountPath: /etc/config
+            - name: shared-pong-log
+              mountPath: /tmp/kube  

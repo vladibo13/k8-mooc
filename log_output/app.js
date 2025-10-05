@@ -10,11 +10,22 @@ const randomString = crypto.randomUUID()
 
 const dir = '/logs'
 const filePath = path.join(dir, 'log.txt')
+const informationPath = '/etc/config/information.txt';
+let fileContent = ''
 
 const pong_dir = '/tmp/kube'
 const filePathPong = path.join(pong_dir, 'log.txt')
 const PING_PONG_URL = 'http://ping-pong-svc:2345/pingpong'
 doesDirExist(dir)
+
+try {
+  fileContent = fs.readFileSync(informationPath, 'utf8');
+  console.log('Content of information.txt:');
+  console.log(fileContent);
+} catch (err) {
+  fileContent = 'undefined'
+  console.error('Failed to read file:', err.message);
+}
 
 function doesDirExist(dir) {
   if (!fs.existsSync(dir)) {
@@ -47,7 +58,13 @@ app.get('/', async (req, res) => {
   //    res.type('text/plain').send(new Date().toISOString() + ` ${randomString} ` + data)
   //  })
   const { data } = await axios.get(PING_PONG_URL)
-  res.json(new Date().toISOString() + ` ${randomString} ` + data.counter)
+  const myDate = new Date().toISOString()
+  res.json(`
+      file content: ${fileContent}
+      env variable: ${process.env.MESSAGE}
+      ${myDate}:${randomString}.
+      ${data.counter}
+    `)
 })
 
 app.get('/status', (req, res) => {
