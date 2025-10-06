@@ -12,7 +12,7 @@ const CACHE_DIR = path.join(DATA_DIR, "cache");
 const CACHE_FILE = path.join(CACHE_DIR, "image.jpg");
 
 // Source + TTL (10 minutes = 600_000 ms)
-const REMOTE_URL = process.env.REMOTE_URL || "https://picsum.photos/1200";
+const REMOTE_URL = process.env.PICSUM_REMOTE_URL || "https://picsum.photos/1200";
 const TTL_MS = Number(process.env.TTL_MS || 600_000);
 
 app.use(express.static(path.join(__dirname, 'dist')))
@@ -117,5 +117,5 @@ app.get("/crash", (_req, res) => {
   setTimeout(() => process.exit(1), 50);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PROJECT_PORT || 3000;
 app.listen(PORT, () => console.log("Listening on", PORT));

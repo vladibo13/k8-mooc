@@ -60,5 +60,5 @@ app.post('/api/todos', (req, res) => {
 })
 
 
-const PORT = process.env.PORT || 3005
+const PORT = process.env.TODO_BACKEND_PORT || 3005
 app.listen(PORT, () => console.log("Listening on", PORT))

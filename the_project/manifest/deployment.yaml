@@ -16,10 +16,13 @@ spec:
       volumes:
         - name: image-volume
           persistentVolumeClaim: 
-            claimName: log-output-claim    
+            claimName: image-volume-claim    
       containers:
         - name: to-do
           image: vladibo/todo-app:0.1.6
+          envFrom:
+          - configMapRef:
+            name: project-config
           volumeMounts: 
           - name: image-volume
             mountPath: /tmp/kube
